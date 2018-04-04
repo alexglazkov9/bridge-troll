@@ -7,6 +7,7 @@ const geo = require('./geo');
 const map = require('./map');
 const view = require('./view');
 const bridges = require('./bridges');
+var mode = require('./night-mode');
 
 // Listen for updates to the map's bounding box (viewable area)
 map.on('update', bounds => {
@@ -73,3 +74,7 @@ geo.init();
 document.addEventListener('DOMContentLoaded', () => {
   bridges.init();
 });
+
+mode.on('changed',() => {
+  bridges.init();
+})

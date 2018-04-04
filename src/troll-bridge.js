@@ -5,6 +5,7 @@ const log = require('./log');
 const map = require('./map');
 const svgMarker = require('./svg-marker');
 const db = require('./db');
+const mode = require('./night-mode');
 
 /**
  * A decorated Bridge type, with extra behaviour for interacting on the map.
@@ -69,11 +70,11 @@ class TrollBridge extends Bridge {
     bridge.isUnlocked((err, unlocked) => {
       if (err) {
         // Default to locked so we at least show something
-        addMarker(svgMarker.locked);
+        addMarker(mode.getLockedIcon());
         return callback(err);
       }
 
-      addMarker(unlocked ? svgMarker.unlocked : svgMarker.locked);
+      addMarker(unlocked ? mode.getUnlockedIcon : mode.getLockedIcon);
       callback(null);
     });
   }
@@ -93,7 +94,7 @@ class TrollBridge extends Bridge {
     db
       .set(bridge.idbKey, new Date())
       .then(() => {
-        bridge.marker.setIcon(svgMarker.unlocked);
+        bridge.marker.setIcon(mode.getUnlockedIcon);
         log.info('Unlocked bridge', bridge);
         callback(null);
       })

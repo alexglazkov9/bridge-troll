@@ -2,6 +2,7 @@
 
 const log = require('../log');
 const svgMarker = require('../svg-marker');
+const mode = require('../night-mode');
 
 const leaflet = require('leaflet');
 const EventEmitter = require('events').EventEmitter;
@@ -41,7 +42,7 @@ class BaseUI extends EventEmitter {
     this.currentLocationMarker = leaflet
       .marker([lat, lng], {
         title: 'Current Location',
-        icon: svgMarker.location
+        icon: mode.getLocationIcon()
       })
       .addTo(map);
 

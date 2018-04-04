@@ -4,7 +4,7 @@ const TrollBridge = require('./troll-bridge');
 const distance = require('./distance');
 const geo = require('./geo');
 const log = require('./log');
-const db = require('./db.js');
+const db = require('./db');
 
 const bridgeData = require('../data/bridge-data.json');
 const bridges = {};
